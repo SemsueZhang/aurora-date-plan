@@ -44,6 +44,38 @@
     .nav-link:hover{
       color:#e88c78;
     }
+    /* 向导步骤 */
+    .step {
+      display: none;
+    }
+    .step.active {
+      display: block;
+    }
+    .progress-dot {
+      width: 1.75rem;
+      height: 1.75rem;
+      border-radius: 9999px;
+      border: 2px solid #e88c78;
+      color: #e88c78;
+      background: transparent;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
+    .progress-dot.active {
+      background-color: #e88c78;
+      border-color: #e88c78;
+      color: white;
+    }
+    .progress-line {
+      flex: 1;
+      height: 2px;
+      background: rgba(232, 140, 120, 0.4);
+    }
   </style>
 </head>
 <body class="font-soft min-h-screen px-4 py-4 text-warm-text">
@@ -61,9 +93,23 @@
       <p class="opacity-80">一起来规划属于我们的约会吧</p>
     </div>
 
-    <div class="bg-warm-card rounded-2xl p-6 shadow-lg space-y-6">
-      <!-- 时间段 -->
-      <section>
+    <div class="bg-warm-card rounded-2xl p-6 shadow-lg">
+      <!-- 步骤指示器 -->
+      <div id="stepLabel" class="text-center text-sm opacity-70 mb-2">第 1 / 5 步</div>
+      <div id="progressWrap" class="flex items-center gap-2 mb-6">
+        <button class="progress-dot active" data-step="1" title="约会时间段">1</button>
+        <div class="progress-line"></div>
+        <button class="progress-dot" data-step="2" title="打算做什么">2</button>
+        <div class="progress-line"></div>
+        <button class="progress-dot" data-step="3" title="吃什么">3</button>
+        <div class="progress-line"></div>
+        <button class="progress-dot" data-step="4" title="出行范围">4</button>
+        <div class="progress-line"></div>
+        <button class="progress-dot" data-step="5" title="约会心情">5</button>
+      </div>
+
+      <!-- 第 1 步：时间段 -->
+      <section class="step active" data-step="1">
         <h3 class="font-medium mb-3 flex items-center gap-2">
           <i class="fa fa-clock-o"></i>约会时间段
         </h3>
@@ -80,8 +126,8 @@
         </div>
       </section>
 
-      <!-- 做什么 -->
-      <section>
+      <!-- 第 2 步：做什么 -->
+      <section class="step" data-step="2">
         <h3 class="font-medium mb-3 flex items-center gap-2">
           <i class="fa fa-gamepad"></i>打算做什么（可多选）
         </h3>
@@ -98,8 +144,8 @@
         </div>
       </section>
 
-      <!-- 吃什么 -->
-      <section>
+      <!-- 第 3 步：吃什么 -->
+      <section class="step" data-step="3">
         <h3 class="font-medium mb-3 flex items-center gap-2">
           <i class="fa fa-cutlery"></i>吃什么（可多选）
         </h3>
@@ -116,8 +162,8 @@
         </div>
       </section>
 
-      <!-- 城市类型 -->
-      <section>
+      <!-- 第 4 步：出行范围 -->
+      <section class="step" data-step="4">
         <h3 class="font-medium mb-3 flex items-center gap-2">
           <i class="fa fa-map-marker"></i>出行范围
         </h3>
@@ -133,8 +179,8 @@
         </div>
       </section>
 
-      <!-- 心情 -->
-      <section>
+      <!-- 第 5 步：心情 -->
+      <section class="step" data-step="5">
         <h3 class="font-medium mb-3 flex items-center gap-2">
           <i class="fa fa-heart"></i>约会心情（可多选）
         </h3>
@@ -147,16 +193,22 @@
         </div>
       </section>
 
-      <!-- 操作按钮 -->
-      <div class="flex gap-3 pt-2">
-        <button id="generateBtn" class="flex-1 bg-warm-primary hover:bg-[#dd7c66] text-white rounded-xl py-2.5 transition">生成约会清单</button>
-        <button id="copyBtn" class="px-4 border border-warm-primary text-warm-primary rounded-xl py-2.5 hover:bg-warm-primary/10 transition">复制</button>
-      </div>
-
-      <!-- 输出结果 -->
-      <div>
-        <h4 class="font-medium mb-2">📋约会清单（可复制）</h4>
+      <!-- 第 6 步：结果 -->
+      <section class="step" data-step="6">
+        <h3 class="font-medium mb-3 flex items-center gap-2">
+          <i class="fa fa-check-circle-o"></i>约会清单（可复制）
+        </h3>
         <textarea id="resultBox" readonly class="w-full h-40 bg-white border border-warm-primary/30 rounded-xl p-3 resize-none outline-none"></textarea>
+        <div class="flex gap-3 pt-3">
+          <button id="copyBtn" class="flex-1 bg-warm-primary hover:bg-[#dd7c66] text-white rounded-xl py-2.5 transition">复制清单</button>
+          <button id="resetBtn" class="px-4 border border-warm-primary text-warm-primary rounded-xl py-2.5 hover:bg-warm-primary/10 transition">重新填写</button>
+        </div>
+      </section>
+
+      <!-- 导航按钮 -->
+      <div class="flex gap-3 pt-4">
+        <button id="prevBtn" style="display:none" class="px-4 border border-warm-primary text-warm-primary rounded-xl py-2.5 hover:bg-warm-primary/10 transition">← 上一项</button>
+        <button id="nextBtn" class="flex-1 bg-warm-primary hover:bg-[#dd7c66] text-white rounded-xl py-2.5 transition">下一项 →</button>
       </div>
     </div>
 
@@ -198,11 +250,7 @@
       return Array.from(document.querySelectorAll(`#${wrapId} .tag-item.active`)).map(el=>el.innerText.trim())
     }
 
-    const generateBtn = document.getElementById('generateBtn');
-    const resultBox = document.getElementById('resultBox');
-    const copyBtn = document.getElementById('copyBtn');
-
-    generateBtn.onclick = ()=>{
+    function generatePlan(){
       const timeStart = document.getElementById('timeStart').value || '未设置';
       const timeEnd = document.getElementById('timeEnd').value || '未设置';
       const activityList = getSelectedTags('activityWrap');
@@ -227,9 +275,71 @@ ${moodList.length>0 ? moodList.join('、') : '暂未选择'}
 ——————————
 希望有一次美好的约会✨`;
 
-      resultBox.value = text;
+      document.getElementById('resultBox').value = text;
     }
 
+    // ===== 向导控制 =====
+    const OPTION_STEPS = 5;
+    const steps = document.querySelectorAll('.step');
+    const dots = document.querySelectorAll('.progress-dot');
+    const stepLabel = document.getElementById('stepLabel');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    let currentStep = 1;
+
+    function showStep(n){
+      currentStep = n;
+      steps.forEach(s=> s.classList.toggle('active', Number(s.dataset.step) === n));
+      dots.forEach(d=> d.classList.toggle('active', Number(d.dataset.step) === n));
+
+      if(n <= OPTION_STEPS){
+        stepLabel.textContent = `第 ${n} / ${OPTION_STEPS} 步`;
+      } else {
+        stepLabel.textContent = '清单已生成 ✨';
+      }
+
+      // 上一项按钮
+      if(n === 1){
+        prevBtn.style.display = 'none';
+      } else {
+        prevBtn.style.display = '';
+        prevBtn.textContent = (n === 6) ? '← 返回修改' : '← 上一项';
+      }
+
+      // 下一项按钮
+      if(n === 6){
+        nextBtn.style.display = 'none';
+      } else {
+        nextBtn.style.display = '';
+        nextBtn.textContent = (n === OPTION_STEPS) ? '生成约会清单 ✨' : '下一项 →';
+      }
+    }
+
+    prevBtn.onclick = ()=>{
+      if(currentStep === 6){
+        showStep(OPTION_STEPS);   // 结果页返回修改 -> 回到第 5 步
+      } else {
+        showStep(currentStep - 1);
+      }
+    }
+
+    nextBtn.onclick = ()=>{
+      if(currentStep === OPTION_STEPS){
+        generatePlan();
+        showStep(6);
+      } else {
+        showStep(currentStep + 1);
+      }
+    }
+
+    // 顶部圆点可跳转
+    dots.forEach(d=>{
+      d.onclick = ()=> showStep(Number(d.dataset.step));
+    });
+
+    // 复制
+    const resultBox = document.getElementById('resultBox');
+    const copyBtn = document.getElementById('copyBtn');
     copyBtn.onclick = async ()=>{
       try{
         await navigator.clipboard.writeText(resultBox.value);
@@ -240,6 +350,18 @@ ${moodList.length>0 ? moodList.join('、') : '暂未选择'}
         alert('✅已复制');
       }
     }
+
+    // 重新填写
+    document.getElementById('resetBtn').onclick = ()=>{
+      document.querySelectorAll('.tag-item').forEach(t=> t.classList.remove('active'));
+      document.getElementById('timeStart').value = '';
+      document.getElementById('timeEnd').value = '';
+      document.querySelector('input[name="cityType"][value="本市"]').checked = true;
+      resultBox.value = '';
+      showStep(1);
+    }
+
+    showStep(1);
   </script>
 </body>
 </html>
