@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rendezvous · 使用指南</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            warm: {
+              bg: '#fff7f2',
+              card: '#ffeede',
+              primary: '#e88c78',
+              text: '#6b4842'
+            }
+          },
+          fontFamily: { soft: ['system-ui', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #fff7f2;
+      background-image: radial-gradient(#ffdfd0 8%, transparent 8%);
+      background-size: 32px 32px;
+    }
+    .nav-link{ transition:0.2s; }
+    .nav-link:hover{ color:#e88c78; }
+  </style>
+</head>
+<body class="font-soft min-h-screen px-4 py-4 text-warm-text">
+<div class="max-w-xl mx-auto">
+  <nav class="flex justify-center gap-6 mb-8 text-base">
+    <a href="./index.html" class="nav-link">首页</a>
+    <a href="./guide.html" class="nav-link font-medium">使用指南</a>
+    <a href="./about.html" class="nav-link">关于</a>
+  </nav>
+
+  <div class="text-center mb-8">
+    <h1 class="text-[clamp(1.6rem,4vw,2rem)] font-semibold mb-2">📖 使用指南</h1>
+    <p class="opacity-80">Rendezvous‑planner</p>
+  </div>
+
+  <div class="bg-warm-card rounded-2xl p-6 shadow-lg space-y-4">
+    <h3 class="text-lg font-semibold">如何使用约会计划生成器</h3>
+    <ul class="space-y-2 list‑disc pl‑5">
+      <li>设置约会的开始、结束时间（支持日期+时刻）</li>
+      <li>点击标签多选活动、美食；输入文字按回车可以自定义选项</li>
+      <li>选择出行范围：本市 / 跨市出行</li>
+      <li>勾选本次约会期待的心情氛围</li>
+      <li>点击【生成约会清单】，预览文本内容</li>
+      <li>点击复制，直接粘贴发给你的约会对象</li>
+    </ul>
+
+    <hr class="border‑warm‑primary/30 my‑4">
+    <h3 class="text-lg font-semibold">提示</h3>
+    <ul class="space‑y‑2">
+      <li>🔸全部数据保存在浏览器本地，不会上传任何服务器</li>
+      <li>🔸支持手机、电脑访问</li>
+      <li>🔸标签可以重复点击取消选中</li>
+    </ul>
+  </div>
+
+  <div class="text-center mt‑6 text‑sm opacity‑70">
+    <a href="./index.html" class="underline">← 返回首页</a>
+  </div>
+</div>
+</body>
+</html>
