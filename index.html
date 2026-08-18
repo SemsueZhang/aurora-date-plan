@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>💌约会计划生成器</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            warm: {
+              bg: '#fff7f2',
+              card: '#ffeede',
+              primary: '#e88c78',
+              text: '#6b4842'
+            }
+          },
+          fontFamily: {
+            soft: ['system-ui', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #fff7f2;
+      background-image: radial-gradient(#ffdfd0 8%, transparent 8%);
+      background-size: 32px 32px;
+    }
+    .tag-item.active {
+      background-color: #e88c78;
+      color: white;
+    }
+    .tag-item {
+      transition: all 0.2s ease;
+    }
+  </style>
+</head>
+<body class="font-soft min-h-screen px-4 py-8 text-warm-text">
+  <div class="max-w-xl mx-auto">
+    <!-- header -->
+    <div class="text-center mb-8">
+      <h1 class="text-[clamp(1.8rem,4vw,2.4rem)] font-semibold mb-2">💌 约会计划小卡片</h1>
+      <p class="opacity-80">一起来规划属于我们的约会吧</p>
+    </div>
+
+    <div class="bg-warm-card rounded-2xl p-6 shadow-lg space-y-6">
+      <!-- 时间段 -->
+      <section>
+        <h3 class="font-medium mb-3 flex items-center gap-2">
+          <i class="fa fa-clock-o"></i>约会时间段
+        </h3>
+        <div class="flex gap-3 flex-wrap items-center">
+          <div>
+            <label class="text-sm opacity-80">开始</label>
+            <input type="datetime-local" id="timeStart" class="mt-1 block border border-warm-primary/40 rounded-lg px-3 py-2 outline-none focus:ring-2 ring-warm-primary/50 bg-white w-full">
+          </div>
+          <span class="pt-6">～</span>
+          <div>
+            <label class="text-sm opacity-80">结束</label>
+            <input type="datetime-local" id="timeEnd" class="mt-1 block border border-warm-primary/40 rounded-lg px-3 py-2 outline-none focus:ring-2 ring-warm-primary/50 bg-white w-full">
+          </div>
+        </div>
+      </section>
+
+      <!-- 做什么 -->
+      <section>
+        <h3 class="font-medium mb-3 flex items-center gap-2">
+          <i class="fa fa-gamepad"></i>打算做什么（可多选）
+        </h3>
+        <div id="activityWrap" class="flex flex-wrap gap-2 mb-3">
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">看电影</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">散步逛公园</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">探店打卡</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">看展</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">KTV</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">运动游玩</span>
+        </div>
+        <div class="flex gap-2">
+          <input id="activityOther" type="text" placeholder="其他活动，输入回车添加" class="flex-1 border border-warm-primary/40 rounded-lg px-3 py-2 bg-white outline-none">
+        </div>
+      </section>
+
+      <!-- 吃什么 -->
+      <section>
+        <h3 class="font-medium mb-3 flex items-center gap-2">
+          <i class="fa fa-cutlery"></i>吃什么（可多选）
+        </h3>
+        <div id="foodWrap" class="flex flex-wrap gap-2 mb-3">
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">火锅</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">烤肉</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">西餐</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">小吃夜市</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">奶茶甜品</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">简餐轻食</span>
+        </div>
+        <div class="flex gap-2">
+          <input id="foodOther" type="text" placeholder="其他美食，输入回车添加" class="flex-1 border border-warm-primary/40 rounded-lg px-3 py-2 bg-white outline-none">
+        </div>
+      </section>
+
+      <!-- 城市类型 -->
+      <section>
+        <h3 class="font-medium mb-3 flex items-center gap-2">
+          <i class="fa fa-map-marker"></i>出行范围
+        </h3>
+        <div class="flex gap-3">
+          <label class="inline-flex items-center gap-1.5 cursor-pointer">
+            <input type="radio" name="cityType" value="本市" checked class="accent-warm-primary">
+            <span>本市</span>
+          </label>
+          <label class="inline-flex items-center gap-1.5 cursor-pointer">
+            <input type="radio" name="cityType" value="跨市出行" class="accent-warm-primary">
+            <span>跨市出行</span>
+          </label>
+        </div>
+      </section>
+
+      <!-- 心情 -->
+      <section>
+        <h3 class="font-medium mb-3 flex items-center gap-2">
+          <i class="fa fa-heart"></i>约会心情（可多选）
+        </h3>
+        <div id="moodWrap" class="flex flex-wrap gap-2">
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">✨期待感</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🌙放松慵懒</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🌹浪漫氛围感</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">😆轻松摆烂</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🎁惊喜感</span>
+        </div>
+      </section>
+
+      <!-- 操作按钮 -->
+      <div class="flex gap-3 pt-2">
+        <button id="generateBtn" class="flex-1 bg-warm-primary hover:bg-[#dd7c66] text-white rounded-xl py-2.5 transition">生成约会清单</button>
+        <button id="copyBtn" class="px-4 border border-warm-primary text-warm-primary rounded-xl py-2.5 hover:bg-warm-primary/10 transition">复制</button>
+      </div>
+
+      <!-- 输出结果 -->
+      <div>
+        <h4 class="font-medium mb-2">📋约会清单（可复制）</h4>
+        <textarea id="resultBox" readonly class="w-full h-40 bg-white border border-warm-primary/30 rounded-xl p-3 resize-none outline-none"></textarea>
+      </div>
+    </div>
+
+    <div class="text-center mt-6 text-sm opacity-70">
+      Made with 💛 | 约会计划小工具
+    </div>
+  </div>
+
+  <script>
+    // 标签点击切换通用逻辑
+    function bindTagClick(wrapId){
+      const wrap = document.getElementById(wrapId);
+      const tags = wrap.querySelectorAll('.tag-item');
+      tags.forEach(tag=>{
+        tag.onclick = ()=> tag.classList.toggle('active');
+      })
+    }
+    bindTagClick('activityWrap');
+    bindTagClick('foodWrap');
+    bindTagClick('moodWrap');
+
+    // 添加自定义标签
+    function bindAddTag(inputId, wrapId){
+      const input = document.getElementById(inputId);
+      const wrap = document.getElementById(wrapId);
+      input.addEventListener('keydown',e=>{
+        if(e.key === 'Enter' && input.value.trim()){
+          const span = document.createElement('span');
+          span.className = 'tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none active';
+          span.innerText = input.value.trim();
+          span.onclick = ()=> span.classList.toggle('active');
+          wrap.appendChild(span);
+          input.value = '';
+        }
+      })
+    }
+    bindAddTag('activityOther','activityWrap');
+    bindAddTag('foodOther','foodWrap');
+
+    // 获取选中标签文本
+    function getSelectedTags(wrapId){
+      return Array.from(document.querySelectorAll(`#${wrapId} .tag-item.active`)).map(el=>el.innerText.trim())
+    }
+
+    // 生成清单
+    const generateBtn = document.getElementById('generateBtn');
+    const resultBox = document.getElementById('resultBox');
+    const copyBtn = document.getElementById('copyBtn');
+
+    generateBtn.onclick = ()=>{
+      const timeStart = document.getElementById('timeStart').value || '未设置';
+      const timeEnd = document.getElementById('timeEnd').value || '未设置';
+      const activityList = getSelectedTags('activityWrap');
+      const foodList = getSelectedTags('foodWrap');
+      const cityType = document.querySelector('input[name="cityType"]:checked').value;
+      const moodList = getSelectedTags('moodWrap');
+
+      let text = `💌约会计划
+——————————
+⏰约会时间段：${timeStart} ~ ${timeEnd}
+📍出行范围：${cityType}
+
+🎯打算做什么：
+${activityList.length>0 ? activityList.join('、') : '暂未选择'}
+
+🍜吃什么：
+${foodList.length>0 ? foodList.join('、') : '暂未选择'}
+
+💖约会心情：
+${moodList.length>0 ? moodList.join('、') : '暂未选择'}
+
+——————————
+希望有一次美好的约会✨`;
+
+      resultBox.value = text;
+    }
+
+    // 复制
+    copyBtn.onclick = async ()=>{
+      try{
+        await navigator.clipboard.writeText(resultBox.value);
+        alert('✅复制成功！可以粘贴发给对方啦');
+      }catch(err){
+        resultBox.select();
+        document.execCommand('copy');
+        alert('✅已复制');
+      }
+    }
+  </script>
+</body>
+</html>
