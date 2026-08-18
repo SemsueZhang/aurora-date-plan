@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>💌约会计划生成器</title>
+  <title>Rendezvous · 约会计划卡片</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <script>
@@ -38,13 +38,26 @@
     .tag-item {
       transition: all 0.2s ease;
     }
+    .nav-link{
+      transition: 0.2s;
+    }
+    .nav-link:hover{
+      color:#e88c78;
+    }
   </style>
 </head>
-<body class="font-soft min-h-screen px-4 py-8 text-warm-text">
+<body class="font-soft min-h-screen px-4 py-4 text-warm-text">
   <div class="max-w-xl mx-auto">
+    <!-- 导航栏 -->
+    <nav class="flex justify-center gap-6 mb-8 text-base">
+      <a href="./index.html" class="nav-link font-medium">首页</a>
+      <a href="./guide.html" class="nav-link">使用指南</a>
+      <a href="./about.html" class="nav-link">关于</a>
+    </nav>
+
     <!-- header -->
     <div class="text-center mb-8">
-      <h1 class="text-[clamp(1.8rem,4vw,2.4rem)] font-semibold mb-2">💌 约会计划小卡片</h1>
+      <h1 class="text-[clamp(1.8rem,4vw,2.4rem)] font-semibold mb-2">💌 Rendezvous</h1>
       <p class="opacity-80">一起来规划属于我们的约会吧</p>
     </div>
 
@@ -148,12 +161,11 @@
     </div>
 
     <div class="text-center mt-6 text-sm opacity-70">
-      Made with 💛 | 约会计划小工具
+      Rendezvous‑planner 💛
     </div>
   </div>
 
   <script>
-    // 标签点击切换通用逻辑
     function bindTagClick(wrapId){
       const wrap = document.getElementById(wrapId);
       const tags = wrap.querySelectorAll('.tag-item');
@@ -165,7 +177,6 @@
     bindTagClick('foodWrap');
     bindTagClick('moodWrap');
 
-    // 添加自定义标签
     function bindAddTag(inputId, wrapId){
       const input = document.getElementById(inputId);
       const wrap = document.getElementById(wrapId);
@@ -183,12 +194,10 @@
     bindAddTag('activityOther','activityWrap');
     bindAddTag('foodOther','foodWrap');
 
-    // 获取选中标签文本
     function getSelectedTags(wrapId){
       return Array.from(document.querySelectorAll(`#${wrapId} .tag-item.active`)).map(el=>el.innerText.trim())
     }
 
-    // 生成清单
     const generateBtn = document.getElementById('generateBtn');
     const resultBox = document.getElementById('resultBox');
     const copyBtn = document.getElementById('copyBtn');
@@ -221,7 +230,6 @@ ${moodList.length>0 ? moodList.join('、') : '暂未选择'}
       resultBox.value = text;
     }
 
-    // 复制
     copyBtn.onclick = async ()=>{
       try{
         await navigator.clipboard.writeText(resultBox.value);
