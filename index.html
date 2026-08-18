@@ -27,9 +27,13 @@
   </script>
   <style>
     body {
-      background-color: #fff7f2;
-      background-image: radial-gradient(#ffdfd0 8%, transparent 8%);
-      background-size: 32px 32px;
+      min-height: 100vh;
+      background-color: #fff4ef;
+      background-image:
+        radial-gradient(1100px 550px at 12% -8%, rgba(255, 201, 176, 0.55) 0%, transparent 55%),
+        radial-gradient(1000px 520px at 108% 15%, rgba(255, 186, 213, 0.45) 0%, transparent 55%),
+        radial-gradient(950px 600px at 50% 118%, rgba(255, 224, 160, 0.5) 0%, transparent 50%);
+      background-attachment: fixed;
     }
     .tag-item.active {
       background-color: #e88c78;
@@ -105,7 +109,7 @@
         <div class="progress-line"></div>
         <button class="progress-dot" data-step="4" title="出行范围">4</button>
         <div class="progress-line"></div>
-        <button class="progress-dot" data-step="5" title="约会心情">5</button>
+        <button class="progress-dot" data-step="5" title="我此刻的心情">5</button>
       </div>
 
       <!-- 第 1 步：时间段 -->
@@ -132,15 +136,16 @@
           <i class="fa fa-gamepad"></i>打算做什么（可多选）
         </h3>
         <div id="activityWrap" class="flex flex-wrap gap-2 mb-3">
-          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">看电影</span>
-          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">散步逛公园</span>
-          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">探店打卡</span>
-          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">看展</span>
-          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">KTV</span>
-          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">运动游玩</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🎬 看电影</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🌳 散步逛公园</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">📸 探店打卡</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🖼️ 看展</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🎤 KTV</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">⚽ 运动游玩</span>
         </div>
         <div class="flex gap-2">
-          <input id="activityOther" type="text" placeholder="其他活动，输入回车添加" class="flex-1 border border-warm-primary/40 rounded-lg px-3 py-2 bg-white outline-none">
+          <input id="activityOther" type="text" placeholder="其他活动，输入后点确定或回车添加" class="flex-1 border border-warm-primary/40 rounded-lg px-3 py-2 bg-white outline-none">
+          <button id="activityAddBtn" type="button" class="px-4 border border-warm-primary text-warm-primary rounded-lg py-2 hover:bg-warm-primary/10 transition">确定</button>
         </div>
       </section>
 
@@ -150,24 +155,25 @@
           <i class="fa fa-cutlery"></i>吃什么（可多选）
         </h3>
         <div id="foodWrap" class="flex flex-wrap gap-2 mb-3">
-          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">火锅</span>
-          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">烤肉</span>
-          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">西餐</span>
-          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">小吃夜市</span>
-          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">奶茶甜品</span>
-          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">简餐轻食</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🍲 火锅</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🍖 烤肉</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🍝 西餐</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🍢 小吃夜市</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🧋 奶茶甜品</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🥗 简餐轻食</span>
         </div>
         <div class="flex gap-2">
-          <input id="foodOther" type="text" placeholder="其他美食，输入回车添加" class="flex-1 border border-warm-primary/40 rounded-lg px-3 py-2 bg-white outline-none">
+          <input id="foodOther" type="text" placeholder="其他美食，输入后点确定或回车添加" class="flex-1 border border-warm-primary/40 rounded-lg px-3 py-2 bg-white outline-none">
+          <button id="foodAddBtn" type="button" class="px-4 border border-warm-primary text-warm-primary rounded-lg py-2 hover:bg-warm-primary/10 transition">确定</button>
         </div>
       </section>
 
-      <!-- 第 4 步：出行范围 -->
+      <!-- 第 4 步：出行范围 + 见面地点 -->
       <section class="step" data-step="4">
         <h3 class="font-medium mb-3 flex items-center gap-2">
           <i class="fa fa-map-marker"></i>出行范围
         </h3>
-        <div class="flex gap-3">
+        <div class="flex gap-3 mb-4">
           <label class="inline-flex items-center gap-1.5 cursor-pointer">
             <input type="radio" name="cityType" value="本市" checked class="accent-warm-primary">
             <span>本市</span>
@@ -177,13 +183,18 @@
             <span>跨市出行</span>
           </label>
         </div>
+        <div>
+          <label class="text-sm opacity-80">见面地点</label>
+          <input id="meetPlace" type="text" placeholder="输入见面地点，如：万象城 / 人民公园" class="mt-1 block w-full border border-warm-primary/40 rounded-lg px-3 py-2 bg-white outline-none focus:ring-2 ring-warm-primary/50">
+        </div>
       </section>
 
       <!-- 第 5 步：心情 -->
       <section class="step" data-step="5">
-        <h3 class="font-medium mb-3 flex items-center gap-2">
-          <i class="fa fa-heart"></i>约会心情（可多选）
+        <h3 class="font-medium mb-1 flex items-center gap-2">
+          <i class="fa fa-heart"></i>我此刻的心情
         </h3>
+        <p class="text-sm opacity-70 mb-3">约会前、发出邀约时的心情（可多选）</p>
         <div id="moodWrap" class="flex flex-wrap gap-2">
           <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">✨期待感</span>
           <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🌙放松慵懒</span>
@@ -229,39 +240,70 @@
     bindTagClick('foodWrap');
     bindTagClick('moodWrap');
 
-    function bindAddTag(inputId, wrapId){
+    function addCustomTag(inputId, wrapId){
       const input = document.getElementById(inputId);
       const wrap = document.getElementById(wrapId);
-      input.addEventListener('keydown',e=>{
-        if(e.key === 'Enter' && input.value.trim()){
-          const span = document.createElement('span');
-          span.className = 'tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none active';
-          span.innerText = input.value.trim();
-          span.onclick = ()=> span.classList.toggle('active');
-          wrap.appendChild(span);
-          input.value = '';
-        }
-      })
+      const text = input.value.trim();
+      if(!text) return;
+      const span = document.createElement('span');
+      span.className = 'tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none active';
+      span.innerText = text;
+      span.onclick = ()=> span.classList.toggle('active');
+      wrap.appendChild(span);
+      input.value = '';
     }
-    bindAddTag('activityOther','activityWrap');
-    bindAddTag('foodOther','foodWrap');
+
+    function bindAddTag(inputId, wrapId, btnId){
+      const input = document.getElementById(inputId);
+      input.addEventListener('keydown', e=>{
+        if(e.key === 'Enter'){
+          addCustomTag(inputId, wrapId);
+          e.preventDefault();
+        }
+      });
+      document.getElementById(btnId).addEventListener('click', ()=> addCustomTag(inputId, wrapId));
+    }
+    bindAddTag('activityOther','activityWrap','activityAddBtn');
+    bindAddTag('foodOther','foodWrap','foodAddBtn');
 
     function getSelectedTags(wrapId){
       return Array.from(document.querySelectorAll(`#${wrapId} .tag-item.active`)).map(el=>el.innerText.trim())
     }
 
+    function formatDateTime(v){
+      if(!v) return '未设置';
+      const [d, t] = v.split('T');
+      if(!d || !t) return v;
+      const [y, m, day] = d.split('-').map(Number);
+      return `${m}/${day} ${t}`;
+    }
+
     function generatePlan(){
-      const timeStart = document.getElementById('timeStart').value || '未设置';
-      const timeEnd = document.getElementById('timeEnd').value || '未设置';
+      const timeStart = document.getElementById('timeStart').value;
+      const timeEnd = document.getElementById('timeEnd').value;
       const activityList = getSelectedTags('activityWrap');
       const foodList = getSelectedTags('foodWrap');
       const cityType = document.querySelector('input[name="cityType"]:checked').value;
+      const meetPlace = document.getElementById('meetPlace').value.trim() || '待定';
       const moodList = getSelectedTags('moodWrap');
+
+      const endings = [
+        '希望有一次美好的约会✨',
+        '好期待和你见面呀💕',
+        '一想到能见到你就开心🥰',
+        '想你啦，快见面吧🌷',
+        '准备了一点点小心思，等你来哦🎁',
+        '和你在一起的每一刻都值得期待💗',
+        '这次约会，一定会留下甜甜的回忆🍬',
+        '倒计时开始，等你哦⏳💖'
+      ];
+      const ending = endings[Math.floor(Math.random() * endings.length)];
 
       let text = `💌约会计划
 ——————————
-⏰约会时间段：${timeStart} ~ ${timeEnd}
+⏰约会时间段：${formatDateTime(timeStart)} ~ ${formatDateTime(timeEnd)}
 📍出行范围：${cityType}
+🗺️见面地点：${meetPlace}
 
 🎯打算做什么：
 ${activityList.length>0 ? activityList.join('、') : '暂未选择'}
@@ -269,11 +311,11 @@ ${activityList.length>0 ? activityList.join('、') : '暂未选择'}
 🍜吃什么：
 ${foodList.length>0 ? foodList.join('、') : '暂未选择'}
 
-💖约会心情：
+💖我此刻的心情：
 ${moodList.length>0 ? moodList.join('、') : '暂未选择'}
 
 ——————————
-希望有一次美好的约会✨`;
+${ending}`;
 
       document.getElementById('resultBox').value = text;
     }
@@ -357,6 +399,7 @@ ${moodList.length>0 ? moodList.join('、') : '暂未选择'}
       document.getElementById('timeStart').value = '';
       document.getElementById('timeEnd').value = '';
       document.querySelector('input[name="cityType"][value="本市"]').checked = true;
+      document.getElementById('meetPlace').value = '';
       resultBox.value = '';
       showStep(1);
     }
