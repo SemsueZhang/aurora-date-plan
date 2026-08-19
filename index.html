@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>CupidLink · 约会计划卡片</title>
+  <title data-i18n="pageTitle">CupidLink · 约会计划卡片</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <script>
@@ -48,6 +48,23 @@
     .nav-link:hover{
       color:#e88c78;
     }
+    /* 语言选择器 */
+    .lang-btn {
+      cursor: pointer;
+      background: transparent;
+      border: none;
+      color: #6b4842;
+      font-size: 0.875rem;
+      transition: 0.2s;
+    }
+    .lang-btn:hover {
+      color: #e88c78;
+    }
+    .lang-btn.active {
+      font-weight: 600;
+      text-decoration: underline;
+      color: #e88c78;
+    }
     /* 向导步骤 */
     .step {
       display: none;
@@ -86,45 +103,45 @@
   <div class="max-w-xl mx-auto">
     <!-- 导航栏 -->
     <nav class="flex justify-center gap-6 mb-8 text-base">
-      <a href="./index.html" class="nav-link font-medium">首页</a>
-      <a href="./guide.html" class="nav-link">使用指南</a>
-      <a href="./about.html" class="nav-link">关于</a>
+      <a href="./index.html" class="nav-link font-medium" data-i18n="navHome">首页</a>
+      <a href="./guide.html" class="nav-link" data-i18n="navGuide">使用指南</a>
+      <a href="./about.html" class="nav-link" data-i18n="navAbout">关于</a>
     </nav>
 
     <!-- header -->
     <div class="text-center mb-8">
       <h1 class="text-[clamp(1.8rem,4vw,2.4rem)] font-semibold mb-2">💘 CupidLink</h1>
-      <p class="opacity-80">一起来规划属于我们的约会吧</p>
+      <p class="opacity-80" data-i18n="subtitle">一起来规划属于我们的约会吧</p>
     </div>
 
     <div class="bg-warm-card rounded-2xl p-6 shadow-lg">
       <!-- 步骤指示器 -->
       <div id="stepLabel" class="text-center text-sm opacity-70 mb-2">第 1 / 5 步</div>
       <div id="progressWrap" class="flex items-center gap-2 mb-6">
-        <button class="progress-dot active" data-step="1" title="约会时间段">1</button>
+        <button class="progress-dot active" data-step="1" title="约会时间段" data-i18n-title="dotTime">1</button>
         <div class="progress-line"></div>
-        <button class="progress-dot" data-step="2" title="打算做什么">2</button>
+        <button class="progress-dot" data-step="2" title="打算做什么" data-i18n-title="dotActivity">2</button>
         <div class="progress-line"></div>
-        <button class="progress-dot" data-step="3" title="吃什么">3</button>
+        <button class="progress-dot" data-step="3" title="吃什么" data-i18n-title="dotFood">3</button>
         <div class="progress-line"></div>
-        <button class="progress-dot" data-step="4" title="出行范围">4</button>
+        <button class="progress-dot" data-step="4" title="出行范围" data-i18n-title="dotTravel">4</button>
         <div class="progress-line"></div>
-        <button class="progress-dot" data-step="5" title="我此刻的心情">5</button>
+        <button class="progress-dot" data-step="5" title="我此刻的心情" data-i18n-title="dotMood">5</button>
       </div>
 
       <!-- 第 1 步：时间段 -->
       <section class="step active" data-step="1">
         <h3 class="font-medium mb-3 flex items-center gap-2">
-          <i class="fa fa-clock-o"></i>约会时间段
+          <i class="fa fa-clock-o"></i><span data-i18n="s1Title">约会时间段</span>
         </h3>
         <div class="flex gap-3 flex-wrap items-center">
           <div>
-            <label class="text-sm opacity-80">开始</label>
+            <label class="text-sm opacity-80" data-i18n="startLabel">开始</label>
             <input type="datetime-local" id="timeStart" class="mt-1 block border border-warm-primary/40 rounded-lg px-3 py-2 outline-none focus:ring-2 ring-warm-primary/50 bg-white w-full">
           </div>
           <span class="pt-6">～</span>
           <div>
-            <label class="text-sm opacity-80">结束</label>
+            <label class="text-sm opacity-80" data-i18n="endLabel">结束</label>
             <input type="datetime-local" id="timeEnd" class="mt-1 block border border-warm-primary/40 rounded-lg px-3 py-2 outline-none focus:ring-2 ring-warm-primary/50 bg-white w-full">
           </div>
         </div>
@@ -133,107 +150,107 @@
       <!-- 第 2 步：做什么 -->
       <section class="step" data-step="2">
         <h3 class="font-medium mb-3 flex items-center gap-2">
-          <i class="fa fa-gamepad"></i>打算做什么（可多选）
+          <i class="fa fa-gamepad"></i><span data-i18n="s2Title">打算做什么（可多选）</span>
         </h3>
         <div id="activityWrap" class="flex flex-wrap gap-2 mb-3">
-          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🎬 看电影</span>
-          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🌳 散步逛公园</span>
-          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">📸 探店打卡</span>
-          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🖼️ 看展</span>
-          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🎤 KTV</span>
-          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">⚽ 运动游玩</span>
-          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🎮 打游戏</span>
-          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🛍️ 逛街购物</span>
-          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🧶 手工DIY</span>
-          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">♨️ 泡温泉</span>
-          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🏕️ 露营</span>
-          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🎶 看演出</span>
-          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🏔️ 爬山</span>
-          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">📷 街拍</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none" data-i18n="act1">🎬 看电影</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none" data-i18n="act2">🌳 散步逛公园</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none" data-i18n="act3">📸 探店打卡</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none" data-i18n="act4">🖼️ 看展</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none" data-i18n="act5">🎤 KTV</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none" data-i18n="act6">⚽ 运动游玩</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none" data-i18n="act7">🎮 打游戏</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none" data-i18n="act8">🛍️ 逛街购物</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none" data-i18n="act9">🧶 手工DIY</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none" data-i18n="act10">♨️ 泡温泉</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none" data-i18n="act11">🏕️ 露营</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none" data-i18n="act12">🎶 看演出</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none" data-i18n="act13">🏔️ 爬山</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none" data-i18n="act14">📷 街拍</span>
         </div>
         <div class="flex gap-2">
-          <input id="activityOther" type="text" placeholder="其他活动，输入后点确定或回车添加" class="flex-1 border border-warm-primary/40 rounded-lg px-3 py-2 bg-white outline-none">
-          <button id="activityAddBtn" type="button" class="px-4 border border-warm-primary text-warm-primary rounded-lg py-2 hover:bg-warm-primary/10 transition">确定</button>
+          <input id="activityOther" type="text" placeholder="其他活动，输入后点确定或回车添加" data-i18n-ph="actPh" class="flex-1 border border-warm-primary/40 rounded-lg px-3 py-2 bg-white outline-none">
+          <button id="activityAddBtn" type="button" class="px-4 border border-warm-primary text-warm-primary rounded-lg py-2 hover:bg-warm-primary/10 transition" data-i18n="confirm">确定</button>
         </div>
       </section>
 
       <!-- 第 3 步：吃什么 -->
       <section class="step" data-step="3">
         <h3 class="font-medium mb-3 flex items-center gap-2">
-          <i class="fa fa-cutlery"></i>吃什么（可多选）
+          <i class="fa fa-cutlery"></i><span data-i18n="s3Title">吃什么（可多选）</span>
         </h3>
         <div id="foodWrap" class="flex flex-wrap gap-2 mb-3">
-          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🍲 火锅</span>
-          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🍖 烤肉</span>
-          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🍝 西餐</span>
-          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🍢 小吃夜市</span>
-          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🧋 奶茶甜品</span>
-          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🥗 简餐轻食</span>
-          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🌶️ 川菜</span>
-          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🍣 日料</span>
-          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🍗 韩式炸鸡</span>
-          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🦞 小龙虾</span>
-          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">☕ 咖啡小坐</span>
-          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🍜 面馆</span>
-          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🦐 海鲜大餐</span>
-          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🥟 早茶点心</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none" data-i18n="food1">🍲 火锅</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none" data-i18n="food2">🍖 烤肉</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none" data-i18n="food3">🍝 西餐</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none" data-i18n="food4">🍢 小吃夜市</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none" data-i18n="food5">🧋 奶茶甜品</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none" data-i18n="food6">🥗 简餐轻食</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none" data-i18n="food7">🌶️ 川菜</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none" data-i18n="food8">🍣 日料</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none" data-i18n="food9">🍗 韩式炸鸡</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none" data-i18n="food10">🦞 小龙虾</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none" data-i18n="food11">☕ 咖啡小坐</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none" data-i18n="food12">🍜 面馆</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none" data-i18n="food13">🦐 海鲜大餐</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none" data-i18n="food14">🥟 早茶点心</span>
         </div>
         <div class="flex gap-2">
-          <input id="foodOther" type="text" placeholder="其他美食，输入后点确定或回车添加" class="flex-1 border border-warm-primary/40 rounded-lg px-3 py-2 bg-white outline-none">
-          <button id="foodAddBtn" type="button" class="px-4 border border-warm-primary text-warm-primary rounded-lg py-2 hover:bg-warm-primary/10 transition">确定</button>
+          <input id="foodOther" type="text" placeholder="其他美食，输入后点确定或回车添加" data-i18n-ph="foodPh" class="flex-1 border border-warm-primary/40 rounded-lg px-3 py-2 bg-white outline-none">
+          <button id="foodAddBtn" type="button" class="px-4 border border-warm-primary text-warm-primary rounded-lg py-2 hover:bg-warm-primary/10 transition" data-i18n="confirm">确定</button>
         </div>
       </section>
 
       <!-- 第 4 步：出行范围 + 见面地点 -->
       <section class="step" data-step="4">
         <h3 class="font-medium mb-3 flex items-center gap-2">
-          <i class="fa fa-map-marker"></i>出行范围
+          <i class="fa fa-map-marker"></i><span data-i18n="s4Title">出行范围</span>
         </h3>
         <div class="flex gap-3 mb-4">
           <label class="inline-flex items-center gap-1.5 cursor-pointer">
             <input type="radio" name="cityType" value="本市" checked class="accent-warm-primary">
-            <span>本市</span>
+            <span data-i18n="radioLocal">本市</span>
           </label>
           <label class="inline-flex items-center gap-1.5 cursor-pointer">
             <input type="radio" name="cityType" value="跨市出行" class="accent-warm-primary">
-            <span>跨市出行</span>
+            <span data-i18n="radioCross">跨市出行</span>
           </label>
         </div>
         <div>
-          <label class="text-sm opacity-80">见面地点</label>
+          <label class="text-sm opacity-80" data-i18n="meetLabel">见面地点</label>
           <div class="flex gap-2 mt-1">
-            <input id="meetPlace" type="text" placeholder="输入见面地点，如：万象城 / 人民公园" class="flex-1 border border-warm-primary/40 rounded-lg px-3 py-2 bg-white outline-none focus:ring-2 ring-warm-primary/50">
-            <button id="meetPlaceBtn" type="button" class="px-4 border border-warm-primary text-warm-primary rounded-lg py-2 hover:bg-warm-primary/10 transition">确定</button>
+            <input id="meetPlace" type="text" placeholder="输入见面地点，如：万象城 / 人民公园" data-i18n-ph="meetPh" class="flex-1 border border-warm-primary/40 rounded-lg px-3 py-2 bg-white outline-none focus:ring-2 ring-warm-primary/50">
+            <button id="meetPlaceBtn" type="button" class="px-4 border border-warm-primary text-warm-primary rounded-lg py-2 hover:bg-warm-primary/10 transition" data-i18n="confirm">确定</button>
           </div>
-          <p id="meetPlaceConfirm" class="text-sm mt-1.5 hidden">✅ 已确认：<span class="font-medium"></span></p>
+          <p id="meetPlaceConfirm" class="text-sm mt-1.5 hidden"><span data-i18n="meetConfirmed">✅ 已确认：</span><span class="meet-value font-medium"></span></p>
         </div>
       </section>
 
       <!-- 第 5 步：心情 -->
       <section class="step" data-step="5">
         <h3 class="font-medium mb-1 flex items-center gap-2">
-          <i class="fa fa-heart"></i>我此刻的心情
+          <i class="fa fa-heart"></i><span data-i18n="s5Title">我此刻的心情</span>
         </h3>
-        <p class="text-sm opacity-70 mb-3">约会前、发出邀约时的心情（可多选）</p>
+        <p class="text-sm opacity-70 mb-3" data-i18n="s5Hint">约会前、发出邀约时的心情（可多选）</p>
         <div id="moodWrap" class="flex flex-wrap gap-2">
-          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🥰 想你啦</span>
-          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🤩 好期待见面</span>
-          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">😊 心情超好</span>
-          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">😅 有点小紧张</span>
-          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">😌 轻松自在</span>
-          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🥳 兴奋到不行</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none" data-i18n="mood1">🥰 想你啦</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none" data-i18n="mood2">🤩 好期待见面</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none" data-i18n="mood3">😊 心情超好</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none" data-i18n="mood4">😅 有点小紧张</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none" data-i18n="mood5">😌 轻松自在</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none" data-i18n="mood6">🥳 兴奋到不行</span>
         </div>
       </section>
 
       <!-- 第 6 步：结果 -->
       <section class="step" data-step="6">
         <h3 class="font-medium mb-3 flex items-center gap-2">
-          <i class="fa fa-check-circle-o"></i>约会清单（可复制）
+          <i class="fa fa-check-circle-o"></i><span data-i18n="s6Title">约会清单（可复制）</span>
         </h3>
         <textarea id="resultBox" readonly class="w-full h-40 bg-white border border-warm-primary/30 rounded-xl p-3 resize-none outline-none"></textarea>
         <div class="flex gap-3 pt-3">
-          <button id="copyBtn" class="flex-1 bg-warm-primary hover:bg-[#dd7c66] text-white rounded-xl py-2.5 transition">复制清单</button>
-          <button id="resetBtn" class="px-4 border border-warm-primary text-warm-primary rounded-xl py-2.5 hover:bg-warm-primary/10 transition">重新填写</button>
+          <button id="copyBtn" class="flex-1 bg-warm-primary hover:bg-[#dd7c66] text-white rounded-xl py-2.5 transition" data-i18n="copyBtn">复制清单</button>
+          <button id="resetBtn" class="px-4 border border-warm-primary text-warm-primary rounded-xl py-2.5 hover:bg-warm-primary/10 transition" data-i18n="resetBtn">重新填写</button>
         </div>
       </section>
 
@@ -244,11 +261,18 @@
       </div>
     </div>
 
+    <!-- 页脚：语言选择 -->
     <div class="text-center mt-6 text-sm opacity-70">
-      CupidLink 💛
+      <div class="flex justify-center gap-3 mb-2">
+        <button class="lang-btn" data-lang="zh">中文</button>
+        <button class="lang-btn" data-lang="en">English</button>
+        <button class="lang-btn" data-lang="ja">日本語</button>
+      </div>
+      <div>CupidLink 💛</div>
     </div>
   </div>
 
+  <script src="./i18n.js"></script>
   <script>
     function bindTagClick(wrapId){
       const wrap = document.getElementById(wrapId);
@@ -293,7 +317,7 @@
       const text = input.value.trim();
       const badge = document.getElementById('meetPlaceConfirm');
       if(text){
-        badge.querySelector('span').textContent = text;
+        badge.querySelector('.meet-value').textContent = text;
         badge.classList.remove('hidden');
         input.blur();
       }
@@ -314,11 +338,11 @@
     }
 
     function formatDateTime(v){
-      if(!v) return '未设置';
-      const [d, t] = v.split('T');
-      if(!d || !t) return v;
+      if(!v) return t('notSet');
+      const [d, tm] = v.split('T');
+      if(!d || !tm) return v;
       const [y, m, day] = d.split('-').map(Number);
-      return `${m}/${day} ${t}`;
+      return `${m}/${day} ${tm}`;
     }
 
     function generatePlan(){
@@ -326,38 +350,30 @@
       const timeEnd = document.getElementById('timeEnd').value;
       const activityList = getSelectedTags('activityWrap');
       const foodList = getSelectedTags('foodWrap');
-      const cityType = document.querySelector('input[name="cityType"]:checked').value;
-      const meetPlace = document.getElementById('meetPlace').value.trim() || '待定';
+      const cityRadio = document.querySelector('input[name="cityType"]:checked');
+      const cityType = cityRadio.nextElementSibling.textContent.trim();
+      const meetPlace = document.getElementById('meetPlace').value.trim() || t('meetDefault');
       const moodList = getSelectedTags('moodWrap');
 
-      const endings = [
-        '希望有一次美好的约会✨',
-        '好期待和你见面呀💕',
-        '一想到能见到你就开心🥰',
-        '想你啦，快见面吧🌷',
-        '准备了一点点小心思，等你来哦🎁',
-        '和你在一起的每一刻都值得期待💗',
-        '这次约会，一定会留下甜甜的回忆🍬',
-        '倒计时开始，等你哦⏳💖'
-      ];
-      const ending = endings[Math.floor(Math.random() * endings.length)];
+      const G = I18N[currentLang].gen;
+      const ending = G.endings[Math.floor(Math.random() * G.endings.length)];
 
-      let text = `💌约会计划
-——————————
-⏰约会时间段：${formatDateTime(timeStart)} ~ ${formatDateTime(timeEnd)}
-📍出行范围：${cityType}
-🗺️见面地点：${meetPlace}
+      let text = `${G.title}
+${G.divider}
+${G.time}${formatDateTime(timeStart)} ~ ${formatDateTime(timeEnd)}
+${G.travel}${cityType}
+${G.meet}${meetPlace}
 
-🎯打算做什么：
-${activityList.length>0 ? activityList.join('、') : '暂未选择'}
+${G.activity}
+${activityList.length>0 ? activityList.join(G.sep) : t('none')}
 
-🍜吃什么：
-${foodList.length>0 ? foodList.join('、') : '暂未选择'}
+${G.food}
+${foodList.length>0 ? foodList.join(G.sep) : t('none')}
 
-💖我此刻的心情：
-${moodList.length>0 ? moodList.join('、') : '暂未选择'}
+${G.mood}
+${moodList.length>0 ? moodList.join(G.sep) : t('none')}
 
-——————————
+${G.divider}
 ${ending}`;
 
       document.getElementById('resultBox').value = text;
@@ -378,9 +394,9 @@ ${ending}`;
       dots.forEach(d=> d.classList.toggle('active', Number(d.dataset.step) === n));
 
       if(n <= OPTION_STEPS){
-        stepLabel.textContent = `第 ${n} / ${OPTION_STEPS} 步`;
+        stepLabel.textContent = t('stepOf').replace('{n}', n);
       } else {
-        stepLabel.textContent = '清单已生成 ✨';
+        stepLabel.textContent = t('doneLabel');
       }
 
       // 上一项按钮
@@ -388,7 +404,7 @@ ${ending}`;
         prevBtn.style.display = 'none';
       } else {
         prevBtn.style.display = '';
-        prevBtn.textContent = (n === 6) ? '← 返回修改' : '← 上一项';
+        prevBtn.textContent = (n === 6) ? t('backEdit') : t('prev');
       }
 
       // 下一项按钮
@@ -396,7 +412,7 @@ ${ending}`;
         nextBtn.style.display = 'none';
       } else {
         nextBtn.style.display = '';
-        nextBtn.textContent = (n === OPTION_STEPS) ? '生成约会清单 ✨' : '下一项 →';
+        nextBtn.textContent = (n === OPTION_STEPS) ? t('generate') : t('next');
       }
     }
 
@@ -428,11 +444,11 @@ ${ending}`;
     copyBtn.onclick = async ()=>{
       try{
         await navigator.clipboard.writeText(resultBox.value);
-        alert('✅复制成功！可以粘贴发给对方啦');
+        alert(t('copySuccess'));
       }catch(err){
         resultBox.select();
         document.execCommand('copy');
-        alert('✅已复制');
+        alert(t('copyFallback'));
       }
     }
 
@@ -447,6 +463,12 @@ ${ending}`;
       resultBox.value = '';
       showStep(1);
     }
+
+    // 切换语言后刷新动态文案与结果
+    window.onLangChange = ()=>{
+      showStep(currentStep);
+      if(currentStep === 6) generatePlan();
+    };
 
     showStep(1);
   </script>
