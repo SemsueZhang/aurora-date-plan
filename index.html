@@ -142,6 +142,14 @@
           <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🖼️ 看展</span>
           <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🎤 KTV</span>
           <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">⚽ 运动游玩</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🎮 打游戏</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🛍️ 逛街购物</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🧶 手工DIY</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">♨️ 泡温泉</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🏕️ 露营</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🎶 看演出</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🏔️ 爬山</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">📷 街拍</span>
         </div>
         <div class="flex gap-2">
           <input id="activityOther" type="text" placeholder="其他活动，输入后点确定或回车添加" class="flex-1 border border-warm-primary/40 rounded-lg px-3 py-2 bg-white outline-none">
@@ -161,6 +169,14 @@
           <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🍢 小吃夜市</span>
           <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🧋 奶茶甜品</span>
           <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🥗 简餐轻食</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🌶️ 川菜</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🍣 日料</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🍗 韩式炸鸡</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🦞 小龙虾</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">☕ 咖啡小坐</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🍜 面馆</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🦐 海鲜大餐</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🥟 早茶点心</span>
         </div>
         <div class="flex gap-2">
           <input id="foodOther" type="text" placeholder="其他美食，输入后点确定或回车添加" class="flex-1 border border-warm-primary/40 rounded-lg px-3 py-2 bg-white outline-none">
@@ -185,7 +201,11 @@
         </div>
         <div>
           <label class="text-sm opacity-80">见面地点</label>
-          <input id="meetPlace" type="text" placeholder="输入见面地点，如：万象城 / 人民公园" class="mt-1 block w-full border border-warm-primary/40 rounded-lg px-3 py-2 bg-white outline-none focus:ring-2 ring-warm-primary/50">
+          <div class="flex gap-2 mt-1">
+            <input id="meetPlace" type="text" placeholder="输入见面地点，如：万象城 / 人民公园" class="flex-1 border border-warm-primary/40 rounded-lg px-3 py-2 bg-white outline-none focus:ring-2 ring-warm-primary/50">
+            <button id="meetPlaceBtn" type="button" class="px-4 border border-warm-primary text-warm-primary rounded-lg py-2 hover:bg-warm-primary/10 transition">确定</button>
+          </div>
+          <p id="meetPlaceConfirm" class="text-sm mt-1.5 hidden">✅ 已确认：<span class="font-medium"></span></p>
         </div>
       </section>
 
@@ -196,11 +216,12 @@
         </h3>
         <p class="text-sm opacity-70 mb-3">约会前、发出邀约时的心情（可多选）</p>
         <div id="moodWrap" class="flex flex-wrap gap-2">
-          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">✨期待感</span>
-          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🌙放松慵懒</span>
-          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🌹浪漫氛围感</span>
-          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">😆轻松摆烂</span>
-          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🎁惊喜感</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🥰 想你啦</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🤩 好期待见面</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">😊 心情超好</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">😅 有点小紧张</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">😌 轻松自在</span>
+          <span class="tag-item px-3 py-1.5 rounded-full border border-warm-primary/50 cursor-pointer select-none">🥳 兴奋到不行</span>
         </div>
       </section>
 
@@ -265,6 +286,28 @@
     }
     bindAddTag('activityOther','activityWrap','activityAddBtn');
     bindAddTag('foodOther','foodWrap','foodAddBtn');
+
+    // 见面地点：点确定或回车确认，生成时以输入框内容为准
+    function confirmMeetPlace(){
+      const input = document.getElementById('meetPlace');
+      const text = input.value.trim();
+      const badge = document.getElementById('meetPlaceConfirm');
+      if(text){
+        badge.querySelector('span').textContent = text;
+        badge.classList.remove('hidden');
+        input.blur();
+      }
+    }
+    document.getElementById('meetPlaceBtn').addEventListener('click', confirmMeetPlace);
+    document.getElementById('meetPlace').addEventListener('keydown', e=>{
+      if(e.key === 'Enter'){
+        confirmMeetPlace();
+        e.preventDefault();
+      }
+    });
+    document.getElementById('meetPlace').addEventListener('input', ()=>{
+      document.getElementById('meetPlaceConfirm').classList.add('hidden');
+    });
 
     function getSelectedTags(wrapId){
       return Array.from(document.querySelectorAll(`#${wrapId} .tag-item.active`)).map(el=>el.innerText.trim())
@@ -400,6 +443,7 @@ ${ending}`;
       document.getElementById('timeEnd').value = '';
       document.querySelector('input[name="cityType"][value="本市"]').checked = true;
       document.getElementById('meetPlace').value = '';
+      document.getElementById('meetPlaceConfirm').classList.add('hidden');
       resultBox.value = '';
       showStep(1);
     }
