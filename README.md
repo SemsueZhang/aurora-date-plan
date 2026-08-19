@@ -17,7 +17,7 @@ CupidLink 是一个纯前端、无后端的约会计划小工具：按步骤填�
 
 ## 🚀 在线使用
 
-访问 GitHub Pages：<https://semsuezhang.github.io/aurora-date-plan/>
+访问 GitHub Pages：<https://semsuezhang.github.io/CupidLink/>
 
 ## 🛠️ 本地运行
 
